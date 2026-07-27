@@ -1,3 +1,6 @@
 .tst{
     list-style-type: none;
 }
+.rond{
+    border-radius: 50%;
+}
