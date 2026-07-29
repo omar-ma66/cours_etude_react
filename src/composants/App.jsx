@@ -34,11 +34,11 @@ export default function BucketList() {
   return (
     <>
       <h1>Liste d’œuvres d’art</h1>
-      <h2>Ma liste à voir absolument :</h2>
+      <h2>Ma liste à voir absolument:</h2>
       <ItemList
         artworks={myList}
         onToggle={handleToggleMyList} />
-      <h2>Votre liste à voir absolument :</h2>
+      <h2>Votre liste à voir absolument:</h2>
       <ItemList
         artworks={yourList}
         onToggle={handleToggleYourList} />
