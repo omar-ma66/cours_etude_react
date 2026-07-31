@@ -1,50 +1,23 @@
 import { useState } from 'react';
+import Chat from './Chat.js';
+import ContactList from './ContactList.js';
 
-const initialItems = [
-  { title: 'bretzels', id: 0 },
-  { title: 'algues croustillantes', id: 1 },
-  { title: 'paquet de princes', id: 2 },
-];
-
-export default function Menu() {
-  const [items, setItems] = useState(initialItems);
-  const [selectedItem, setSelectedItem] = useState(
-    items[0]
-  );
-
-  function handleItemChange(id, e) {
-    setItems(items.map(item => {
-      if (item.id === id) {
-        return {
-          ...item,
-          title: e.target.value,
-        };
-      } else {
-        return item;
-      }
-    }));
-  }
-
+export default function Messenger() {
+  const [to, setTo] = useState(contacts[0]);
   return (
-    <>
-      <h2>Quel est votre goûter de voyage ?</h2>
-      <ul>
-        {items.map((item, index) => (
-          <li key={item.id}>
-            <input
-              value={item.title}
-              onChange={e => {
-                handleItemChange(item.id, e)
-              }}
-            />
-            {' '}
-            <button onClick={() => {
-              setSelectedItem(item);
-            }}>Choisissez</button>
-          </li>
-        ))}
-      </ul>
-      <p>Vous avez choisi {selectedItem.title}.</p>
-    </>
-  );
+    <div>
+      <ContactList
+        contacts={contacts}
+        selectedContact={to}
+        onSelect={contact => setTo(contact)}
+      />
+      <Chat contact={to} />
+    </div>
+  )
 }
+
+const contacts = [
+  { id: 0, name: 'Clara', email: 'clara@mail.com' },
+  { id: 1, name: 'Alice', email: 'alice@mail.com' },
+  { id: 2, name: 'Bob', email: 'bob@mail.com' }
+];
