@@ -1,5 +1,5 @@
-import Heading from './Heading.jsx';
-import Section from './Section.jsx';
+import Heading from "./Heading.jsx";
+import Section from "./Section.jsx";
 
 export default function Page() {
   return (
