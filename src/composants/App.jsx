@@ -1,78 +1,25 @@
-import { useReducer } from 'react';
-import AddTask from './AddTask.js';
-import TaskList from './TaskList.js';
+import Heading from './Heading.jsx';
+import Section from './Section.jsx';
 
-export default function TaskApp() {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
-
-  function handleAddTask(text) {
-    dispatch({
-      type: 'added',
-      id: nextId++,
-      text: text,
-    });
-  }
-
-  function handleChangeTask(task) {
-    dispatch({
-      type: 'changed',
-      task: task,
-    });
-  }
-
-  function handleDeleteTask(taskId) {
-    dispatch({
-      type: 'deleted',
-      id: taskId,
-    });
-  }
-
+export default function Page() {
   return (
-    <>
-      <h1>Voyage à Prague</h1>
-      <AddTask onAddTask={handleAddTask} />
-      <TaskList
-        tasks={tasks}
-        onChangeTask={handleChangeTask}
-        onDeleteTask={handleDeleteTask}
-      />
-    </>
+    <Section>
+      <Heading level={1}>Titre</Heading>
+      <Section>
+        <Heading level={2}>Section</Heading>
+        <Heading level={2}>Section</Heading>
+        <Heading level={2}>Section</Heading>
+        <Section>
+          <Heading level={3}>Sous-section</Heading>
+          <Heading level={3}>Sous-section</Heading>
+          <Heading level={3}>Sous-section</Heading>
+          <Section>
+            <Heading level={4}>Sous-sous-section</Heading>
+            <Heading level={4}>Sous-sous-section</Heading>
+            <Heading level={4}>Sous-sous-section</Heading>
+          </Section>
+        </Section>
+      </Section>
+    </Section>
   );
 }
-
-function tasksReducer(tasks, action) {
-  switch (action.type) {
-    case 'added': {
-      return [
-        ...tasks,
-        {
-          id: action.id,
-          text: action.text,
-          done: false,
-        },
-      ];
-    }
-    case 'changed': {
-      return tasks.map((t) => {
-        if (t.id === action.task.id) {
-          return action.task;
-        } else {
-          return t;
-        }
-      });
-    }
-    case 'deleted': {
-      return tasks.filter((t) => t.id !== action.id);
-    }
-    default: {
-      throw Error('Action inconnue : ' + action.type);
-    }
-  }
-}
-
-let nextId = 3;
-const initialTasks = [
-  {id: 0, text: 'Visiter le musée Franz-Kafka', done: true},
-  {id: 1, text: 'Voir un spectacle de marionnettes', done: false},
-  {id: 2, text: 'Prendre une photo du mur John Lennon', done: false},
-];
